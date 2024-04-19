@@ -51,7 +51,10 @@ with tqdm(total=len(anime_list), desc="Processing") as pbar:
         response = requests.get(url, headers=headers)
         
         # Получаем JSON ответа
-        anime_info = response.json()
+        try: 
+            anime_info = response.json()
+        except json.decoder.JSONDecodeError:
+            print("Response is not in JSON format")
         
         # Проверяем, есть ли результаты поиска
         if anime_info:
