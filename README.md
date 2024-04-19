@@ -21,14 +21,15 @@ Python script that allows you to extract anime data from Anixart and save it in 
 ## Usage
 
 1. Place the **Anixart_Bookmarks.txt** file in the project directory.
-2. Run the script using the following command:
+2. Convert **Anixart_Bookmarks.txt** to UFT-8. By default it is saved in UTF-8 with BOM.
+3. Run the script using the following command:
 
    ```shell
    python ./main.py
    ```
 
-3. When the script completes, the results will be saved to the anime_data.json file.
-4. Go to Shikimori profile settings and import anime_data.json.
+4. When the script completes, the results will be saved to the anime_data.json file.
+5. Go to Shikimori profile settings and import anime_data.json.
 
 ## How to export Anixart data
 
