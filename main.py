@@ -34,7 +34,7 @@ headers = {
 anime_data_list = []
 
 # Считываем названия аниме из файла
-with open("input/Anixart_Bookmarks.txt", "r", encoding="utf-8") as file:
+with open("Anixart_Bookmarks.txt", "r", encoding="utf-8") as file:
     anime_list = file.readlines()
 
 # Используем tqdm для отображения прогресса
@@ -93,5 +93,5 @@ with tqdm(total=len(anime_list), desc="Processing") as pbar:
         pbar.update(1)
 
 # Записываем список данных об аниме в JSON файл
-with open("output/anime_info.json", "w", encoding="utf-8") as json_file:
+with open("anime_info.json", "w", encoding="utf-8") as json_file:
     json.dump(anime_data_list, json_file, ensure_ascii=False, indent=4)
