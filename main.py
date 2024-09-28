@@ -1,6 +1,7 @@
 import os
 import requests
 import json
+import time
 from tqdm import tqdm
 
 # Function to split the input file into smaller files with a maximum of 100 lines each
@@ -102,6 +103,7 @@ for file_index in range(1, file_count + 1):
             if anime_data:
                 anime_data_list.append(anime_data)
             pbar.update(1)
+            time.sleep(1)
 
     # Optionally remove the processed split file
     os.remove(split_file_name)
