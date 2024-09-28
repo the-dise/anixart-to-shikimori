@@ -103,7 +103,7 @@ for file_index in range(1, file_count + 1):
             if anime_data:
                 anime_data_list.append(anime_data)
             pbar.update(1)
-            time.sleep(1)
+            time.sleep(3)
 
     # Optionally remove the processed split file
     os.remove(split_file_name)
