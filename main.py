@@ -1,7 +1,18 @@
 import os
+import time
+
 import requests
 import json
 from tqdm import tqdm
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+
+# Session settings
+session = requests.Session()
+retry = Retry(connect=3, backoff_factor=0.5)
+adapter = HTTPAdapter(max_retries=retry)
+session.mount('http://', adapter)
+session.mount('https://', adapter)
 
 # Function to split the input file into smaller files with a maximum of 100 lines each
 def split_file(input_file, lines_per_file=100):
@@ -51,8 +62,9 @@ def process_anime_entry(anime_entry):
     score_str = parts[6].strip()
 
     url = f"https://shikimori.one/api/animes?search={anime_name}"
-    response = requests.get(url, headers=headers)
-    
+    response = session.get(url, headers=headers)
+
+
     try:
         anime_info = response.json()
     except json.decoder.JSONDecodeError:
@@ -102,6 +114,8 @@ for file_index in range(1, file_count + 1):
             if anime_data:
                 anime_data_list.append(anime_data)
             pbar.update(1)
+            # Delay to prevent "Too many requests"(code 429)
+            time.sleep(0.5)
 
     # Optionally remove the processed split file
     os.remove(split_file_name)
